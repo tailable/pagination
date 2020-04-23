@@ -52,7 +52,7 @@ import RenderlessPagination from './RenderlessPagination.vue';
 
 @Component({
     components: {
-        RenderlessPagination
+        RenderlessPagination,
     },
     props: {
         data: {
@@ -65,22 +65,22 @@ import RenderlessPagination from './RenderlessPagination.vue';
         },
         size: {
             type: String,
-            default: "small",
+            default: 'small',
         },
         align: {
             type: String,
-            default: "right",
+            default: 'right',
         },
         showDisabled: {
             type: Boolean,
             default: true,
-        }
-    }
+        },
+    },
 })
 
-export default class App extends Vue {
-    onPaginationChangePage(page) {
-
+export default class Pagination extends Vue {
+    public onPaginationChangePage(page: any) {
+        alert(page);
     }
 }
 </script>

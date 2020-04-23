@@ -1,79 +1,75 @@
 <script lang="ts">
 
-import Vue from 'vue'
-import Component from 'vue-class-component'
+import Vue from 'vue';
+import Component from 'vue-class-component';
 
 @Component({
     props: {
         data: {
             type: Object,
-            default: () => {
-                meta: {
-
-                }
-            }
+            default: () => ({}),
         },
         limit: {
             type: Number,
-            default: 0
+            default: 0,
         },
         showDisabled: {
             type: Boolean,
-            default: false
+            default: false,
         },
         size: {
             type: String,
             default: 'default',
-            validator: value => {
+            validator: (value) => {
                 return ['small', 'default', 'large'].indexOf(value) !== -1;
-            }
+            },
         },
         align: {
             type: String,
             default: 'left',
-            validator: value => {
+            validator: (value) => {
                 return ['left', 'center', 'right'].indexOf(value) !== -1;
-            }
-        }
+            },
+        },
     },
 })
 
 export default class RenderlessPagination extends Vue {
 
-    get isApiResource () : boolean {
+    get isApiResource(): boolean {
         return !!this.$props.data.meta;
     }
-    get currentPage () : number {
+    get currentPage(): number {
         return this.isApiResource ? this.$props.data.meta.current_page : this.$props.data.current_page;
     }
-    get firstPageUrl () {
+    get firstPageUrl() {
         return this.isApiResource ? this.$props.data.links.first : null;
     }
-    get from () {
+    get from() {
         return this.isApiResource ? this.$props.data.meta.from : this.$props.data.from;
     }
-    get lastPage () {
+    get lastPage() {
         return this.isApiResource ? this.$props.data.meta.last_page : this.$props.data.last_page;
     }
-    get lastPageUrl () {
+    get lastPageUrl() {
         return this.isApiResource ? this.$props.data.links.last : null;
     }
-    get nextPageUrl () {
+    get nextPageUrl() {
         return this.isApiResource ? this.$props.data.links.next : this.$props.data.next_page_url;
     }
-    get perPage () {
+    get perPage() {
         return this.isApiResource ? this.$props.data.meta.per_page : this.$props.data.per_page;
     }
-    get prevPageUrl () {
+    get prevPageUrl() {
         return this.isApiResource ? this.$props.data.links.prev : this.$props.data.prev_page_url;
     }
-    get to () {
+    get to() {
         return this.isApiResource ? this.$props.data.meta.to : this.$props.data.to;
     }
-    get total () {
+    get total() {
         return this.isApiResource ? this.$props.data.meta.total : this.$props.data.total;
     }
-    get pageRange () {
+    get pageRange() {
         if (this.$props.limit === -1) {
             return 0;
         }
@@ -85,17 +81,17 @@ export default class RenderlessPagination extends Vue {
         const delta = this.$props.limit;
         const left = current - delta;
         const right = current + delta + 1;
-        var range = [];
-        var pages = [];
-        var l;
+        const range: number[] = [];
+        const pages: any[] = [];
+        let l: number;
 
-        for (var i = 1; i <= last; i++) {
+        for (let i = 1; i <= last; i++) {
             if (i === 1 || i === last || (i >= left && i < right)) {
                 range.push(i);
             }
         }
 
-        range.forEach(function (i) {
+        range.forEach((i) => {
             if (l) {
                 if (i - l === 2) {
                     pages.push(l + 1);
@@ -108,9 +104,8 @@ export default class RenderlessPagination extends Vue {
         });
         return pages;
     }
-        
-    render() {
-        return this.$scopedSlots.default( {
+    public render() {
+        return this.$scopedSlots.default({
             data: this.$props.data,
             limit: this.$props.limit,
             showDisabled: this.$props.showDisabled,
@@ -142,7 +137,7 @@ export default class RenderlessPagination extends Vue {
                     this.nextPage();
                 },
             },
-            pageButtonEvents: (page : any) => ({
+            pageButtonEvents: (page: any) => ({
                 click: (e: any) => {
                     e.preventDefault();
                     this.selectPage(page);
@@ -150,15 +145,12 @@ export default class RenderlessPagination extends Vue {
             }),
         });
     }
-
     public previousPage() {
         this.selectPage((this.currentPage - 1));
     }
-
     public nextPage() {
         this.selectPage((this.currentPage + 1));
     }
-
     public selectPage(page: any) {
         if (page === '...') {
             return;

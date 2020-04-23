@@ -6,34 +6,34 @@
 
 <script lang="ts">
 
-import axios from "axios";
+import axios from 'axios';
 import Pagination from './components/Pagination.vue';
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
     components: {
-        Pagination
+        Pagination,
     },
 })
 
 export default class App extends Vue {
-    data: {
-        data: Array<Object>,
-        payload: Array<Object>,
-        links: Object,
-        meta: Object,
+    private data: {
+        data: object[],
+        payload: object[],
+        links: object,
+        meta: object,
     } = {
         data: [],
         payload: [],
         links: {},
         meta: {},
-    }
-    created() {
-        axios.get("http://laravel-vue-datatable-example.test/api/eloquent")
-            .then(response => {
+    };
+    public created() {
+        axios.get('http://laravel-vue-datatable-example.test/api/eloquent')
+            .then((response) => {
                 this.data = response.data;
             })
-            .catch(errors => {
+            .catch((errors) => {
                 alert(errors);
             });
     }
