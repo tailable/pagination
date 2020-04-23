@@ -80,7 +80,7 @@ import RenderlessPagination from './RenderlessPagination.vue';
 
 export default class Pagination extends Vue {
     public onPaginationChangePage(page: any) {
-        alert(page);
+        this.$emit('pageChanged', page);
     }
 }
 </script>

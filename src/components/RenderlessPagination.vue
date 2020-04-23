@@ -104,7 +104,7 @@ export default class RenderlessPagination extends Vue {
         });
         return pages;
     }
-    public render() {
+    public render(this: any) {
         return this.$scopedSlots.default({
             data: this.$props.data,
             limit: this.$props.limit,
