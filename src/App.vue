@@ -1,29 +1,41 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <Pagination :data="data" />
   </div>
 </template>
 
 <script lang="ts">
+
+import axios from "axios";
+import Pagination from './components/Pagination.vue';
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
 
 @Component({
-  components: {
-    HelloWorld,
-  },
+    components: {
+        Pagination
+    },
 })
-export default class App extends Vue {}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+export default class App extends Vue {
+    data: {
+        data: Array<Object>,
+        payload: Array<Object>,
+        links: Object,
+        meta: Object,
+    } = {
+        data: [],
+        payload: [],
+        links: {},
+        meta: {},
+    }
+    created() {
+        axios.get("http://laravel-vue-datatable-example.test/api/eloquent")
+            .then(response => {
+                this.data = response.data;
+            })
+            .catch(errors => {
+                alert(errors);
+            });
+    }
 }
-</style>
+</script>
