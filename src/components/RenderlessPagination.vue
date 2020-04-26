@@ -35,39 +35,39 @@ export default class RenderlessPagination extends Vue {
     get currentPage(): number {
         return this.isApiResource ? this.$props.data.meta.current_page : this.$props.data.current_page;
     }
-    get firstPageUrl() {
+    get firstPageUrl(): string {
         return this.isApiResource ? this.$props.data.links.first : null;
     }
-    get from() {
+    get from(): number {
         return this.isApiResource ? this.$props.data.meta.from : this.$props.data.from;
     }
-    get lastPage() {
+    get lastPage(): number {
         return this.isApiResource ? this.$props.data.meta.last_page : this.$props.data.last_page;
     }
-    get lastPageUrl() {
+    get lastPageUrl(): string {
         return this.isApiResource ? this.$props.data.links.last : null;
     }
-    get nextPageUrl() {
+    get nextPageUrl(): string {
         return this.isApiResource ? this.$props.data.links.next : this.$props.data.next_page_url;
     }
-    get perPage() {
+    get perPage(): number {
         return this.isApiResource ? this.$props.data.meta.per_page : this.$props.data.per_page;
     }
-    get prevPageUrl() {
+    get prevPageUrl(): string {
         return this.isApiResource ? this.$props.data.links.prev : this.$props.data.prev_page_url;
     }
-    get to() {
+    get to(): number {
         return this.isApiResource ? this.$props.data.meta.to : this.$props.data.to;
     }
-    get total() {
+    get total(): number {
         return this.isApiResource ? this.$props.data.meta.total : this.$props.data.total;
     }
-    get pageRange() {
+    get pageRange(): any[] {
         if (this.$props.limit === -1) {
-            return 0;
+            return [];
         }
         if (this.$props.limit === 0) {
-            return this.lastPage;
+            return [1, this.lastPage];
         }
         const current = this.currentPage;
         const last = this.lastPage;
@@ -122,19 +122,16 @@ export default class RenderlessPagination extends Vue {
                     },
                     prevButtonEvents: {
                         click: (e: any) => {
-                            e.preventDefault();
                             this.previousPage();
                         },
                     },
                     nextButtonEvents: {
                         click: (e: any) => {
-                            e.preventDefault();
                             this.nextPage();
                         },
                     },
                     pageButtonEvents: (page: any) => ({
                         click: (e: any) => {
-                            e.preventDefault();
                             this.selectPage(page);
                         },
                     }),
