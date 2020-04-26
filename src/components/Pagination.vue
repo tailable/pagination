@@ -43,35 +43,40 @@
                                 }"
                                 :disabled="!computed.prevPageUrl"
                                 class="inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
-                                <svg fill="none"
-                                    :class="{
-                                        'w-5 h-5': size == 'default',
-                                        'w-4 h-4': size == 'small',
-                                    }"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path d="M15 19l-7-7 7-7"></path>
-                                </svg>
+                                
+                                <slot name="previous-button">
+                                    <svg fill="none"
+                                        :class="{
+                                            'w-5 h-5': size == 'default',
+                                            'w-4 h-4': size == 'small',
+                                        }"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                </slot>
                             </button>
                         </li>
 
-                        <li v-for="(page, key) in computed.pageRange" :key="key">
-                            <button type="button"
-                                :class="{
-                                    'bg-blue-500': page == computed.currentPage,
-                                    'text-white': page == computed.currentPage,
-                                    'text-gray-700': page != computed.currentPage,
-                                    'hover:bg-gray-200': page != computed.currentPage,
-                                    'px-4': size == 'default',
-                                    'py-2': size == 'default',
-                                    'px-2': size == 'small',
-                                    'py-1': size == 'small',
-                                }"
-                                v-on="pageButtonEvents(page)"
-                                class="inline-flex items-center h-full mx-1 text-base font-medium leading-5  transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
-                                {{ page }}
-                                <span class="sr-only" v-if="page == computed.currentPage">(current)</span>
-                            </button>
-                        </li>
+                        <template v-if="showNumbers">
+                            <li  v-for="(page, key) in computed.pageRange" :key="key">
+                                <button type="button"
+                                    :class="{
+                                        'bg-blue-500': page == computed.currentPage,
+                                        'text-white': page == computed.currentPage,
+                                        'text-gray-700': page != computed.currentPage,
+                                        'hover:bg-gray-200': page != computed.currentPage,
+                                        'px-4': size == 'default',
+                                        'py-2': size == 'default',
+                                        'px-2': size == 'small',
+                                        'py-1': size == 'small',
+                                    }"
+                                    v-on="pageButtonEvents(page)"
+                                    class="inline-flex items-center h-full mx-1 text-base font-medium leading-5  transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
+                                    {{ page }}
+                                    <span class="sr-only" v-if="page == computed.currentPage">(current)</span>
+                                </button>
+                            </li>
+                        </template>
 
                         <li
                             v-if="computed.nextPageUrl || showDisabled">
@@ -85,15 +90,19 @@
                                 }"
                                 :disabled="!computed.nextPageUrl"
                                 class="inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
-                                <svg
-                                    fill="none"
-                                    :class="{
-                                        'w-5 h-5': size == 'default',
-                                        'w-4 h-4': size == 'small',
-                                    }"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path d="M9 5l7 7-7 7"></path>
-                                </svg>
+                                
+                                <slot name="next-button">
+                                    <svg
+                                        fill="none"
+                                        :class="{
+                                            'w-5 h-5': size == 'default',
+                                            'w-4 h-4': size == 'small',
+                                        }"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </slot>
+                                
                             </button>
                         </li>
                     </ul>
@@ -127,6 +136,10 @@ import RenderlessPagination from './RenderlessPagination.vue';
         showDisabled: {
             type: Boolean,
             default: true,
+        },
+        showNumbers: {
+            type: Boolean,
+            default: false,
         },
     },
 })
