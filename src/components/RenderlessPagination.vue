@@ -24,13 +24,6 @@ import Component from 'vue-class-component';
                 return ['small', 'default', 'large'].indexOf(value) !== -1;
             },
         },
-        align: {
-            type: String,
-            default: 'left',
-            validator: (value) => {
-                return ['left', 'center', 'right'].indexOf(value) !== -1;
-            },
-        },
     },
 })
 
@@ -113,7 +106,6 @@ export default class RenderlessPagination extends Vue {
                     limit: this.$props.limit,
                     showDisabled: this.$props.showDisabled,
                     size: this.$props.size,
-                    align: this.$props.align,
                     computed: {
                         isApiResource: this.isApiResource,
                         currentPage: this.currentPage,

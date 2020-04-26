@@ -1,9 +1,15 @@
 <template>
   <div id="app">
+    <h2 class="my-2 text-center">Size sm</h2>
     <pagination
-        :limit="1"
         :data="data"
         size="small"
+        @pageChanged="pageChanged">
+    </pagination>
+
+    <h2 class="my-2 text-center">Size md(default)</h2>
+    <pagination
+        :data="data"
         @pageChanged="pageChanged">
     </pagination>
   </div>

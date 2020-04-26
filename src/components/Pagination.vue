@@ -3,13 +3,12 @@
         :data="data"
         :size="size"
         :limit="limit"
-        :align="align"
         :show-disabled="showDisabled"
         @pagination-change-page="onPaginationChangePage">
 
         <div
             class="flex flex-col max-w-3xl mx-auto my-2 bg-white"
-            slot-scope="{ data, limit, showDisabled, size, align, computed, prevButtonEvents, nextButtonEvents, pageButtonEvents }">
+            slot-scope="{ data, limit, showDisabled, size, computed, prevButtonEvents, nextButtonEvents, pageButtonEvents }">
             <div
                 class="flex flex-col items-center justify-between px-4 py-3 border-t border-gray-400 sm:flex-row">
                 <div class="flex mb-3 sm:mb-0">
@@ -31,16 +30,8 @@
                 <div class="flex">
                     <ul
                         class="relative inline-flex list-none"
-                        v-if="computed.total > computed.perPage"
-                        :class="{
-                            'pagination-sm': size == 'small',
-                            'pagination-lg': size == 'large',
-                            'justify-content-center': align == 'center',
-                            'justify-content-end': align == 'right'
-                        }">
-                        
+                        v-if="computed.total > computed.perPage">
                         <li
-                            :class="{'disabled': !computed.prevPageUrl}"
                             v-if="computed.prevPageUrl || showDisabled">
                             <button
                                 type="button"
@@ -50,7 +41,8 @@
                                     'px-2 py-2': size == 'default',
                                     'px-1 py-1': size == 'small',
                                 }"
-                                class="inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
+                                :disabled="!computed.prevPageUrl"
+                                class="inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
                                 <svg fill="none"
                                     :class="{
                                         'w-5 h-5': size == 'default',
@@ -82,7 +74,6 @@
                         </li>
 
                         <li
-                            :class="{'disabled': !computed.nextPageUrl}"
                             v-if="computed.nextPageUrl || showDisabled">
                             <button
                                 type="button"
@@ -92,7 +83,8 @@
                                     'px-2 py-2': size == 'default',
                                     'px-1 py-1': size == 'small',
                                 }"
-                                class="inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
+                                :disabled="!computed.nextPageUrl"
+                                class="inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
                                 <svg
                                     fill="none"
                                     :class="{
@@ -126,15 +118,11 @@ import RenderlessPagination from './RenderlessPagination.vue';
         },
         limit: {
             type: Number,
-            default: 5,
+            default: 1,
         },
         size: {
             type: String,
             default: 'default',
-        },
-        align: {
-            type: String,
-            default: 'right',
         },
         showDisabled: {
             type: Boolean,
