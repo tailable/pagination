@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <Pagination :data="data" />
+    <pagination
+        :limit="1"
+        :data="data"
+        size="small"
+        @pageChanged="pageChanged">
+    </pagination>
   </div>
 </template>
 
@@ -17,6 +22,8 @@ import { Component, Vue } from 'vue-property-decorator';
 })
 
 export default class App extends Vue {
+
+    private url = 'http://laravel-vue-datatable-example.test/api/eloquent';
     private data: {
         data: object[],
         payload: object[],
@@ -29,13 +36,25 @@ export default class App extends Vue {
         meta: {},
     };
     public created() {
-        axios.get('http://laravel-vue-datatable-example.test/api/eloquent')
-            .then((response) => {
-                this.data = response.data;
-            })
-            .catch((errors) => {
-                alert(errors);
-            });
+        this.getData();
+    }
+
+    public getData(url = this.url, options = {}) {
+        axios.get(url, {
+            params: options,
+        })
+        .then((response) => {
+            this.data = response.data;
+        })
+        .catch((errors) => {
+            alert(errors);
+        });
+    }
+
+    public pageChanged(page: number) {
+        this.getData(this.url, {
+            page,
+        });
     }
 }
 </script>

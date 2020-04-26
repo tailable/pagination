@@ -7,41 +7,107 @@
         :show-disabled="showDisabled"
         @pagination-change-page="onPaginationChangePage">
 
-        <ul class="p-4 bg-gray-400 my-0 mx-auto inline-block"
-            :class="{
-                'pagination-sm': size == 'small',
-                'pagination-lg': size == 'large',
-                'justify-content-center': align == 'center',
-                'justify-content-end': align == 'right'
-            }"
-            v-if="computed.total > computed.perPage"
+        <div
+            class="flex flex-col max-w-3xl mx-auto my-2 bg-white"
             slot-scope="{ data, limit, showDisabled, size, align, computed, prevButtonEvents, nextButtonEvents, pageButtonEvents }">
+            <div
+                class="flex flex-col items-center justify-between px-4 py-3 border-t border-gray-400 sm:flex-row">
+                <div class="flex mb-3 sm:mb-0">
+                    <p
+                        :class="{
+                            'text-base': size == 'default',
+                            'text-sm': size == 'small',
+                        }"
+                        class="leading-5 text-gray-700">
+                        Showing
+                        <span class="font-medium">{{ data.meta.from }}</span>
+                        to
+                        <span class="font-medium">{{ data.meta.to }}</span>
+                        of
+                        <span class="font-medium">{{ data.meta.total }}</span>
+                        results
+                    </p>
+                </div>
+                <div class="flex">
+                    <ul
+                        class="relative inline-flex list-none"
+                        v-if="computed.total > computed.perPage"
+                        :class="{
+                            'pagination-sm': size == 'small',
+                            'pagination-lg': size == 'large',
+                            'justify-content-center': align == 'center',
+                            'justify-content-end': align == 'right'
+                        }">
+                        
+                        <li
+                            :class="{'disabled': !computed.prevPageUrl}"
+                            v-if="computed.prevPageUrl || showDisabled">
+                            <button
+                                type="button"
+                                v-on="prevButtonEvents"
+                                :tabindex="!computed.prevPageUrl && -1"
+                                :class="{
+                                    'px-2 py-2': size == 'default',
+                                    'px-1 py-1': size == 'small',
+                                }"
+                                class="inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
+                                <svg fill="none"
+                                    :class="{
+                                        'w-5 h-5': size == 'default',
+                                        'w-4 h-4': size == 'small',
+                                    }"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                            </button>
+                        </li>
 
-            <li class="inline-block bg-gray-600 rounded-l" :class="{'disabled': !computed.prevPageUrl}" v-if="computed.prevPageUrl || showDisabled">
-                <a class="p-2 block" href="#" aria-label="Previous" :tabindex="!computed.prevPageUrl && -1" v-on="prevButtonEvents">
-                    <slot name="prev-nav">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                    </slot>
-                </a>
-            </li>
+                        <li v-for="(page, key) in computed.pageRange" :key="key">
+                            <button type="button"
+                                :class="{
+                                    'bg-blue-500': page == computed.currentPage,
+                                    'text-white': page == computed.currentPage,
+                                    'text-gray-700': page != computed.currentPage,
+                                    'hover:bg-gray-200': page != computed.currentPage,
+                                    'px-4': size == 'default',
+                                    'py-2': size == 'default',
+                                    'px-2': size == 'small',
+                                    'py-1': size == 'small',
+                                }"
+                                v-on="pageButtonEvents(page)"
+                                class="inline-flex items-center h-full mx-1 text-base font-medium leading-5  transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
+                                {{ page }}
+                                <span class="sr-only" v-if="page == computed.currentPage">(current)</span>
+                            </button>
+                        </li>
 
-            <li class="inline-block bg-gray-600" v-for="(page, key) in computed.pageRange" :key="key" :class="{ 'active': page == computed.currentPage }">
-                <a class="p-2 block" href="#" v-on="pageButtonEvents(page)">
-                    {{ page }}
-                    <span class="sr-only" v-if="page == computed.currentPage">(current)</span>
-                </a>
-            </li>
-
-            <li class="inline-block bg-gray-600 rounded-r" :class="{'disabled': !computed.nextPageUrl}" v-if="computed.nextPageUrl || showDisabled">
-                <a class="p-2 block" href="#" aria-label="Next" :tabindex="!computed.nextPageUrl && -1" v-on="nextButtonEvents">
-                    <slot name="next-nav">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                    </slot>
-                </a>
-            </li>
-        </ul>
+                        <li
+                            :class="{'disabled': !computed.nextPageUrl}"
+                            v-if="computed.nextPageUrl || showDisabled">
+                            <button
+                                type="button"
+                                :tabindex="!computed.nextPageUrl && -1"
+                                v-on="nextButtonEvents"
+                                :class="{
+                                    'px-2 py-2': size == 'default',
+                                    'px-1 py-1': size == 'small',
+                                }"
+                                class="inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
+                                <svg
+                                    fill="none"
+                                    :class="{
+                                        'w-5 h-5': size == 'default',
+                                        'w-4 h-4': size == 'small',
+                                    }"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </renderless-pagination>
 </template>
 
@@ -64,7 +130,7 @@ import RenderlessPagination from './RenderlessPagination.vue';
         },
         size: {
             type: String,
-            default: 'small',
+            default: 'default',
         },
         align: {
             type: String,
@@ -78,7 +144,7 @@ import RenderlessPagination from './RenderlessPagination.vue';
 })
 
 export default class Pagination extends Vue {
-    public onPaginationChangePage(page: any) {
+    private onPaginationChangePage(page: number) {
         this.$emit('pageChanged', page);
     }
 }

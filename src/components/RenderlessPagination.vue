@@ -104,46 +104,51 @@ export default class RenderlessPagination extends Vue {
         });
         return pages;
     }
-    public render(this: any) {
-        return this.$scopedSlots.default({
-            data: this.$props.data,
-            limit: this.$props.limit,
-            showDisabled: this.$props.showDisabled,
-            size: this.$props.size,
-            align: this.$props.align,
-            computed: {
-                isApiResource: this.isApiResource,
-                currentPage: this.currentPage,
-                firstPageUrl: this.firstPageUrl,
-                from: this.from,
-                lastPage: this.lastPage,
-                lastPageUrl: this.lastPageUrl,
-                nextPageUrl: this.nextPageUrl,
-                perPage: this.perPage,
-                prevPageUrl: this.prevPageUrl,
-                to: this.to,
-                total: this.total,
-                pageRange: this.pageRange,
-            },
-            prevButtonEvents: {
-                click: (e: any) => {
-                    e.preventDefault();
-                    this.previousPage();
-                },
-            },
-            nextButtonEvents: {
-                click: (e: any) => {
-                    e.preventDefault();
-                    this.nextPage();
-                },
-            },
-            pageButtonEvents: (page: any) => ({
-                click: (e: any) => {
-                    e.preventDefault();
-                    this.selectPage(page);
-                },
-            }),
-        });
+    public render(h: any) {
+        if (this.$scopedSlots.default) {
+            return h(
+                'div',
+                this.$scopedSlots.default({
+                    data: this.$props.data,
+                    limit: this.$props.limit,
+                    showDisabled: this.$props.showDisabled,
+                    size: this.$props.size,
+                    align: this.$props.align,
+                    computed: {
+                        isApiResource: this.isApiResource,
+                        currentPage: this.currentPage,
+                        firstPageUrl: this.firstPageUrl,
+                        from: this.from,
+                        lastPage: this.lastPage,
+                        lastPageUrl: this.lastPageUrl,
+                        nextPageUrl: this.nextPageUrl,
+                        perPage: this.perPage,
+                        prevPageUrl: this.prevPageUrl,
+                        to: this.to,
+                        total: this.total,
+                        pageRange: this.pageRange,
+                    },
+                    prevButtonEvents: {
+                        click: (e: any) => {
+                            e.preventDefault();
+                            this.previousPage();
+                        },
+                    },
+                    nextButtonEvents: {
+                        click: (e: any) => {
+                            e.preventDefault();
+                            this.nextPage();
+                        },
+                    },
+                    pageButtonEvents: (page: any) => ({
+                        click: (e: any) => {
+                            e.preventDefault();
+                            this.selectPage(page);
+                        },
+                    }),
+                }),
+            );
+        }
     }
     public previousPage() {
         this.selectPage((this.currentPage - 1));
