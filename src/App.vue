@@ -102,7 +102,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 export default class App extends Vue {
 
-    private url = 'http://laravel-vue-datatable-example.test/api/eloquent';
+    private url = process.env.VUE_APP_ELOQUENT_URL;
     private data: {
         data: object[],
         payload: object[],
