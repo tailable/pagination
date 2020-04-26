@@ -65,13 +65,15 @@
                                         'text-white': page == computed.currentPage,
                                         'text-gray-700': page != computed.currentPage,
                                         'hover:bg-gray-200': page != computed.currentPage,
+                                        'border': page != computed.currentPage,
+                                        'border-gray-400': page != computed.currentPage,
                                         'px-4': size == 'default',
                                         'py-2': size == 'default',
                                         'px-2': size == 'small',
                                         'py-1': size == 'small',
                                     }"
                                     v-on="pageButtonEvents(page)"
-                                    class="inline-flex items-center h-full mx-1 text-base font-medium leading-5  transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
+                                    class="inline-flex items-center h-full mx-1 text-base font-medium leading-5 transition duration-150 ease-in-out bg-white rounded-md active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
                                     {{ page }}
                                     <span class="sr-only" v-if="page == computed.currentPage">(current)</span>
                                 </button>
@@ -102,7 +104,6 @@
                                         <path d="M9 5l7 7-7 7"></path>
                                     </svg>
                                 </slot>
-                                
                             </button>
                         </li>
                     </ul>
