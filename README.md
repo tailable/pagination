@@ -34,7 +34,7 @@ Vue.use(LaravelVuePagination);
 
 ```html
 <laravel-vue-tailwind-pagination
-    :data="pages"
+    :data="users"
     :showNumbers="true">
 </laravel-vue-tailwind-pagination>
 ```
@@ -43,13 +43,13 @@ Vue.use(LaravelVuePagination);
 export default {
     data() {
         return {
-            pages: {},
+            users: {},
         }
     },
     created() {
         axios.get("http://laravel.test/api/users")
         .then(response => {
-            this.pages = response.data;
+            this.users = response.data;
         })
     }
 }
