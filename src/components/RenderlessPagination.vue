@@ -7,7 +7,11 @@ import Component from 'vue-class-component';
     props: {
         data: {
             type: Object,
-            default: () => ({}),
+            default: () => ({
+                data: [],
+                meta: {},
+                links: {},
+            }),
         },
         limit: {
             type: Number,
