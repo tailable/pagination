@@ -1,5 +1,5 @@
 # Laravel Vue Pagination
-A Vue.js datatable component for Laravel that works with Bootstrap.
+A Vue.js pagination component for Laravel thats built for Tailwind.
 
 ## Requirements
 
