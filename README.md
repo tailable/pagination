@@ -1,3 +1,5 @@
+![Node.js CI](https://github.com/laravel-vue-tailwind/pagination/workflows/Node.js%20CI/badge.svg)
+
 # Laravel Vue Pagination
 A Vue.js pagination component for Laravel thats built for Tailwind.
 
@@ -5,6 +7,7 @@ A Vue.js pagination component for Laravel thats built for Tailwind.
 
 * [Vue.js](https://vuejs.org/) 2.x
 * [Laravel](http://laravel.com/docs/) 5.x +
+* [Tailwindcss](https://tailwindcss.com/) 1.x +
 
 ## Demo & Docs
 
@@ -62,13 +65,10 @@ export default {
 | Name | Type | Default | Description  
 | --- | --- | --- | --- |
 | `data ` | Object | {} | The data from paginated AJAX request |
-| `limit` | Number | 1 | The table pagination limit perside of the middle. |
+| `limit` | Number | 1 | The table pagination limit each side of the middle. |
 | `size` | String | "default" | (optional) Must be default or small or large |
 | `showDisabled` | Boolean | true | (optional) Pagination buttons next and previous, do you want them displayed if there is nothing to click? |
-| `showNumbers ` | Boolean | true | (optional) Pagination show numbered buttons? |
-
-
-## Further Examples
+| `showNumbers ` | Boolean | false | (optional) Pagination show numbered buttons? |
 
 
 ## Development
@@ -79,14 +79,8 @@ To work on the package locally or to add to the documentation, run the following
 npm run serve
 ```
 
-To deploy documentation to GitHub under a PR. Please run the following after uncommenting the outputDir line in the vue.config.js file:
-
-```bash
-npm run build-docs
-```
-
 To run the tests:
 
 ```bash
-npm run test
+npm run test:unit
 ```
