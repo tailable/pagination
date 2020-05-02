@@ -60,12 +60,12 @@ export default {
 
 ### API
 
-#### Datatable Props
+#### Pagination Props
 
 | Name | Type | Default | Description  
 | --- | --- | --- | --- |
 | `data ` | Object | {} | The data from paginated AJAX request |
-| `limit` | Number | 1 | The table pagination limit each side of the middle. |
+| `limit` | Number | 1 | The pagination limit each side of the middle button. |
 | `size` | String | "default" | (optional) Must be default or small or large |
 | `showDisabled` | Boolean | true | (optional) Pagination buttons next and previous, do you want them displayed if there is nothing to click? |
 | `showNumbers ` | Boolean | false | (optional) Pagination show numbered buttons? |
