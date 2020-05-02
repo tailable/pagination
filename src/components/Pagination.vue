@@ -126,10 +126,9 @@ import RenderlessPagination from './RenderlessPagination.vue';
     props: {
         data: {
             type: Object,
+            required: true,
             default: () => ({
-                meta: {
-                    from: 1,
-                },
+                meta: {},
                 data: [],
                 links: {},
             }),

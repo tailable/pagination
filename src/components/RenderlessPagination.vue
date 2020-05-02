@@ -7,6 +7,7 @@ import Component from 'vue-class-component';
     props: {
         data: {
             type: Object,
+            required: true,
             default: () => ({
                 data: [],
                 meta: {},

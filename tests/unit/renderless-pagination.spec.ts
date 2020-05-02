@@ -1,14 +1,14 @@
 import { mount } from '@vue/test-utils';
-import Pagination from '@/components/Pagination.vue';
+import RenderlessPagination from '@/components/RenderlessPagination.vue';
 
-describe('Pagination.vue', () => {
+describe('RenderlessPagination.vue', () => {
   it('can be mounted', () => {
     const data = {
       data: [],
       meta: {},
       links: {},
     };
-    const wrapper = mount(Pagination, {
+    const wrapper = mount(RenderlessPagination, {
       propsData: { data },
     });
 
