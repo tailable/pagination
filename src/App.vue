@@ -92,11 +92,13 @@
         size="small"
         @pageChanged="pageChanged">
 
-        <div class="flex" slot-scope="{ data, pageRange, currentPage, limit, showDisabled, size, computed, prevButtonEvents, nextButtonEvents, pageButtonEvents }">
-             <ul class="relative inline-flex list-none">
+        <div
+            class="flex"
+            slot-scope="{ data, pageRange, currentPage, previousButtonHandler, nextButtonHandler, pageButtonHandler }">
+             <ul class="relative inline-flex list-none mx-auto mt-4">
                 <li>
                     <button
-                        v-on="prevButtonEvents"
+                        @click="previousButtonHandler"
                         :disabled="!data.links.prev"
                         class="inline-flex items-center px-2 py-2 h-full text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border-l border-t border-b border-gray-400 hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
                         
@@ -115,7 +117,7 @@
 
                 <li v-for="(page, key) in pageRange" :key="key">
                     <button
-                        v-on="pageButtonEvents(page)"
+                        @click="pageButtonHandler(page)"
                         :class="{
                             'bg-purple-500 text-white': page == currentPage,
                             'text-gray-700 border-l border-t border-b border-gray-400 hover:bg-gray-200': page != currentPage,
@@ -126,7 +128,7 @@
                 </li>
                 <li>
                     <button
-                        v-on="nextButtonEvents"
+                        @click="nextButtonHandler"
                         :disabled="!data.links.next"
                         class="inline-flex items-center px-2 py-2 h-full text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
                         
@@ -174,11 +176,11 @@ export default class App extends Vue {
         links: {},
         meta: {},
     };
-    public created() {
+    private created() {
         this.getData();
     }
 
-    public getData(url = this.url, options = {}) {
+    private getData(url = this.url, options = {}) {
         axios.get(url, {
             params: options,
         })
@@ -190,7 +192,7 @@ export default class App extends Vue {
         });
     }
 
-    public pageChanged(page: number) {
+    private pageChanged(page: number) {
         this.getData(this.url, {
             page,
         });
