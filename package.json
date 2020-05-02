@@ -1,6 +1,6 @@
 {
   "name": "laravel-vue-tailwind-pagination",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": false,
   "homepage": "https://laravel-vue-tailwind.github.io/pagination/",
   "main": "./dist/laravel-vue-tailwind-pagination.common.js",
