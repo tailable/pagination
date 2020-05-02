@@ -31,6 +31,15 @@ import LaravelVuePagination from 'laravel-vue-tailwind-pagination';
 Vue.use(LaravelVuePagination);
 ```
 
+### Add the following variants to your tailwind.config.js
+
+```javascript
+variants: {
+    opacity: ['disabled'],
+    cursor: ['disabled'],
+},
+```
+
 ### Basic Example
 > Pagination.vue
 
