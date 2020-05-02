@@ -1,4 +1,4 @@
-![Node.js CI](https://github.com/laravel-vue-tailwind/pagination/workflows/Node.js%20CI/badge.svg)
+![Vue Test Utils - Jest](https://github.com/laravel-vue-tailwind/pagination/workflows/Vue%20Test%20Utils%20-%20Jest/badge.svg)
 
 # Laravel Vue Pagination
 A Vue.js pagination component for Laravel thats built for Tailwind.
