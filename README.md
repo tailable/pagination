@@ -1,6 +1,6 @@
 ![Vue Test Utils - Jest](https://github.com/laravel-vue-tailwind/pagination/workflows/Vue%20Test%20Utils%20-%20Jest/badge.svg)
 
-# Laravel Vue Pagination
+# Tailable Pagination
 A Vue.js pagination component for Laravel thats built for Tailwind.
 
 ## Requirements
@@ -16,11 +16,11 @@ See [https://laravel-vue-tailwind.github.io/pagination/](https://laravel-vue-tai
 ## Component Installation
 
 ```bash
-npm install laravel-vue-tailwind-pagination
+npm install tailable-pagination
 
 or
 
-yarn add laravel-vue-tailwind-pagination
+yarn add tailable-pagination
 ```
 
 ### Register the Plugin
