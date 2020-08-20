@@ -26,9 +26,9 @@ yarn add laravel-vue-tailwind-pagination
 ### Register the Plugin
 
 ```javascript
-import LaravelVuePagination from 'laravel-vue-tailwind-pagination';
+import TailablePagination from 'tailable-pagination';
 
-Vue.use(LaravelVuePagination);
+Vue.use(TailablePagination);
 ```
 
 ### Add the following variants to your tailwind.config.js
@@ -45,10 +45,10 @@ variants: {
 
 
 ```html
-<laravel-vue-tailwind-pagination
+<tailable-pagination
     :data="users"
     :showNumbers="true">
-</laravel-vue-tailwind-pagination>
+</tailable-pagination>
 ```
 
 ```javascript
