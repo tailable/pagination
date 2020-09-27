@@ -16,7 +16,7 @@
                 :pageButtonHandler="pageButtonHandler"
                 :previousButtonHandler="previousButtonHandler">
 
-                <div class="flex flex-col items-center justify-between px-4 py-3 border-t border-gray-400 sm:flex-row">
+                <div class="flex flex-col items-center justify-between px-4 py-2 sm:flex-row">
                     <div class="flex mb-3 sm:mb-0">
                         <p
                             :class="{
