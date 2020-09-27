@@ -80,6 +80,12 @@ export default {
 | `showNumbers ` | Boolean | false | (optional) Pagination show numbered buttons? |
 
 
+#### Pagination Events
+
+| Name | Description  
+| --- | --- |
+| `page-changed`  | A button has been clicked |
+
 ## Development
 
 To work on the package locally or to add to the documentation, run the following command:

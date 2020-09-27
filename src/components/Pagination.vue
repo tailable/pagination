@@ -48,7 +48,7 @@
                                         'px-1 py-1': size == 'small',
                                     }"
                                     :disabled="!prevPageUrl"
-                                    class="inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                                    class="inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
                                     
                                     <slot name="previous-button">
                                         <svg fill="none"
@@ -74,7 +74,7 @@
                                             'bg-blue-500 text-white': page == currentPage,
                                             'text-gray-700 border border-gray-400 hover:bg-gray-200': page != currentPage,
                                         }"
-                                        class="inline-flex items-center h-full mx-1 text-base font-medium leading-5 transition duration-150 ease-in-out bg-white rounded-md active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
+                                        class="inline-flex items-center h-full mx-1 text-base font-medium leading-5 transition duration-150 ease-in-out rounded-md active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
                                         {{ page }}
                                         <span class="sr-only" v-if="page == currentPage">(current)</span>
                                     </button>
@@ -154,7 +154,7 @@ import RenderlessPagination from './RenderlessPagination.vue';
 
 export default class Pagination extends Vue {
     private onPaginationChangePage(page: number) {
-        this.$emit('pageChanged', page);
+        this.$emit('page-changed', page);
     }
 }
 </script>
