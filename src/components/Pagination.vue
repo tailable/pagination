@@ -16,7 +16,7 @@
                 :pageButtonHandler="pageButtonHandler"
                 :previousButtonHandler="previousButtonHandler">
 
-                <div class="flex flex-col items-center justify-between px-4 py-2 sm:flex-row">
+                <div :class="containerClasses" class="d-flex justify-content-between">
                     <div class="flex mb-3 sm:mb-0">
                         <p
                             :class="{
@@ -35,46 +35,39 @@
                     </div>
                     <div class="flex">
                         <ul
-                            class="relative inline-flex list-none"
+                            :class="ulClasses"
                             v-if="total > perPage">
                             <li
-                                v-if="prevPageUrl || showDisabled">
+                                v-if="prevPageUrl || showDisabled"
+                                :class="{'page-item pagination-prev-nav': framework === 'bootstrap', 'disabled': !prevPageUrl && framework === 'bootstrap'}">
                                 <button
                                     type="button"
                                     @click="previousButtonHandler"
                                     :tabindex="!prevPageUrl && -1"
-                                    :class="{
-                                        'px-2 py-2': size == 'default',
-                                        'px-1 py-1': size == 'small',
-                                    }"
-                                    :disabled="!prevPageUrl"
-                                    class="inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                                    :class="previousButtonClasses"
+                                    :disabled="!prevPageUrl">
                                     
                                     <slot name="previous-button">
-                                        <svg fill="none"
-                                            :class="{
-                                                'w-5 h-5': size == 'default',
-                                                'w-4 h-4': size == 'small',
-                                            }"
+                                        <svg
+                                            fill="none"
+                                            v-if="framework === 'tailwind'"
+                                            :class="previousButtonIconClasses"
                                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                                             <path d="M15 19l-7-7 7-7"></path>
                                         </svg>
+                                        <span v-else>
+                                            Previous
+                                        </span>
                                     </slot>
                                 </button>
                             </li>
 
                             <template v-if="showNumbers">
-                                <li  v-for="(page, key) in pageRange" :key="key">
+                                <li :class="{'page-item pagination-page-nav': framework === 'bootstrap', 'active': framework === 'bootstrap' && page == currentPage }" v-for="(page, key) in pageRange" :key="key">
                                     <button
                                         type="button"
                                         @click="pageButtonHandler(page)"
-                                        :class="{
-                                            'px-2 py-1': size == 'small',
-                                            'px-4 py-2': size == 'default',
-                                            'bg-blue-500 text-white': page == currentPage,
-                                            'text-gray-700 border border-gray-400 hover:bg-gray-200': page != currentPage,
-                                        }"
-                                        class="inline-flex items-center h-full mx-1 text-base font-medium leading-5 transition duration-150 ease-in-out rounded-md active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
+                                        :class="numberButtonClasses(page, currentPage)">
                                         {{ page }}
                                         <span class="sr-only" v-if="page == currentPage">(current)</span>
                                     </button>
@@ -82,28 +75,26 @@
                             </template>
 
                             <li
+                                :class="{'page-item pagination-next-nav': framework === 'bootstrap', 'disabled': !nextPageUrl && framework === 'bootstrap'}"
                                 v-if="nextPageUrl || showDisabled">
                                 <button
                                     type="button"
                                     @click="nextButtonHandler"
                                     :tabindex="!nextPageUrl && -1"
-                                    :class="{
-                                        'px-2 py-2': size == 'default',
-                                        'px-1 py-1': size == 'small',
-                                    }"
                                     :disabled="!nextPageUrl"
-                                    class="inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                                    :class="nextButtonClasses">
                                     
                                     <slot name="next-button">
                                         <svg
                                             fill="none"
-                                            :class="{
-                                                'w-5 h-5': size == 'default',
-                                                'w-4 h-4': size == 'small',
-                                            }"
+                                            v-if="framework === 'tailwind'"
+                                            :class="nextButtonIconClasses"
                                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                                             <path d="M9 5l7 7-7 7"></path>
                                         </svg>
+                                        <span v-else>
+                                            Next
+                                        </span>
                                     </slot>
                                 </button>
                             </li>
@@ -149,7 +140,73 @@ import RenderlessPagination from './RenderlessPagination.vue';
             type: Boolean,
             default: false,
         },
+        framework: {
+            type: String,
+            default: "tailwind",
+            validator: function (value) {
+                return [
+                    'bootstrap',
+                    'tailwind',
+                ].indexOf(value) !== -1;
+            }
+        },
     },
+    methods: {
+        numberButtonClasses(page, currentPage) : Object {
+            return {
+                "inline-flex items-center h-full mx-1 text-base font-medium leading-5 transition duration-150 ease-in-out rounded-md active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700": this.framework === "tailwind",
+                'px-2 py-1': this.size == 'small' && this.framework === "tailwind",
+                'px-4 py-2': this.size == 'default' && this.framework === "tailwind",
+                'bg-blue-500 text-white': page == currentPage && this.framework === 'tailwind',
+                'text-gray-700 border border-gray-400 hover:bg-gray-200': page != currentPage && this.framework === 'tailwind',
+                'page-link': this.framework === "bootstrap",
+            }
+        },
+    },
+    computed: {
+        containerClasses() : Object {
+            return {
+                "flex flex-col items-center justify-between px-4 py-2 sm:flex-row": this.framework === "tailwind",
+            }
+        },
+        ulClasses() : Object {
+            return {
+                "relative inline-flex list-none": this.framework === "tailwind",
+                "pagination": this.framework === "bootstrap",
+                'pagination-sm': this.size == 'small' && this.framework === "bootstrap",
+                'pagination-lg': this.size == 'large' && this.framework === "bootstrap",
+            }
+        },
+        previousButtonClasses() : Object {
+            return {
+                "inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed": this.framework === "tailwind",
+                'px-2 py-2': this.size == 'default' && this.framework === "tailwind",
+                'px-1 py-1': this.size == 'small' && this.framework === "tailwind",
+                "page-link": this.framework === "bootstrap",
+            }
+        },
+        previousButtonIconClasses() : Object {
+
+            return {
+                'w-5 h-5': this.size == 'default' && this.framework === "tailwind",
+                'w-4 h-4': this.size == 'small' && this.framework === "tailwind",
+            }
+        },
+        nextButtonClasses() : Object {
+            return {
+                "inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed": this.framework === "tailwind",
+                'px-2 py-2': this.size == 'default' && this.framework === "tailwind",
+                'px-1 py-1': this.size == 'small' && this.framework === "tailwind",
+                "page-link": this.framework === "bootstrap",
+            }
+        },
+        nextButtonIconClasses() : Object {
+            return {
+                'w-5 h-5': this.size == 'default' && this.framework === "tailwind",
+                'w-4 h-4': this.size == 'small' && this.framework === "tailwind",
+            }
+        },        
+    }
 })
 
 export default class Pagination extends Vue {
