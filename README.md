@@ -78,7 +78,10 @@ export default {
 | `size` | String | "default" | (optional) Must be default or small or large |
 | `showDisabled` | Boolean | true | (optional) Pagination buttons next and previous, do you want them displayed if there is nothing to click? |
 | `showNumbers ` | Boolean | false | (optional) Pagination show numbered buttons? |
-
+| `translate ` | Object | {
+                nextButton: 'Next',
+                previousButton: 'Previous',
+            } | (optional) Translate button text |
 
 #### Pagination Events
 

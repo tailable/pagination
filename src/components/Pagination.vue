@@ -56,7 +56,7 @@
                                             <path d="M15 19l-7-7 7-7"></path>
                                         </svg>
                                         <span v-else>
-                                            Previous
+                                            {{ translate.previousButton }}
                                         </span>
                                     </slot>
                                 </button>
@@ -93,7 +93,7 @@
                                             <path d="M9 5l7 7-7 7"></path>
                                         </svg>
                                         <span v-else>
-                                            Next
+                                            {{ translate.nextButton }}
                                         </span>
                                     </slot>
                                 </button>
@@ -150,6 +150,13 @@ import RenderlessPagination from './RenderlessPagination.vue';
                 ].indexOf(value) !== -1;
             }
         },
+        translate: {
+            type: Object,
+            default: () => ({
+                nextButton: 'Next',
+                previousButton: 'Previous',
+            })
+        }
     },
     methods: {
         numberButtonClasses(page, currentPage) : Object {
