@@ -198,7 +198,7 @@ export default class App extends Vue {
     }
 
     private getData(url = this.url, options = {}) {
-        
+
         axios.get(url, {
             params: options,
         })
@@ -211,7 +211,7 @@ export default class App extends Vue {
     }
 
     private toggleFramework() {
-        this.framework = this.framework === "bootstrap" ? "tailwind" : "bootstrap";
+        this.framework = this.framework === 'bootstrap' ? 'tailwind' : 'bootstrap';
     }
 
     private pageChanged(page: number) {
