@@ -76,8 +76,9 @@ export default {
 | `data ` | Object | {} | The data from paginated AJAX request |
 | `limit` | Number | 1 | The pagination limit each side of the middle button. |
 | `size` | String | "default" | (optional) Must be default or small or large |
-| `showDisabled` | Boolean | true | (optional) Pagination buttons next and previous, do you want them displayed if there is nothing to click? |
-| `showNumbers ` | Boolean | false | (optional) Pagination show numbered buttons? |
+| `show-disabled` | Boolean | true | (optional) Pagination buttons next and previous, do you want them displayed if there is nothing to click? |
+| `show-numbers ` | Boolean | false | (optional) Pagination show numbered buttons? |
+| `hide-when-empty ` | Boolean | false | (optional) Hides the pagination buttons when there is no need to show them |
 | `translate ` | Object | {
                 nextButton: 'Next',
                 previousButton: 'Previous',

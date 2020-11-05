@@ -35,8 +35,7 @@
                     </div>
                     <div class="flex">
                         <ul
-                            :class="ulClasses"
-                            v-if="total > perPage">
+                            :class="ulClasses">
                             <li
                                 v-if="prevPageUrl || showDisabled"
                                 :class="{'page-item pagination-prev-nav': framework === 'bootstrap', 'disabled': !prevPageUrl && framework === 'bootstrap'}">
@@ -135,6 +134,10 @@ import RenderlessPagination from './RenderlessPagination.vue';
         showNumbers: {
             type: Boolean,
             default: false,
+        },
+        hideWhenEmpty: {
+            type: Boolean,
+            default: true,
         },
         translate: {
             type: Object,

@@ -20,7 +20,7 @@ import Component from 'vue-class-component';
         },
         showDisabled: {
             type: Boolean,
-            default: false,
+            default: true,
         },
         size: {
             type: String,
