@@ -17,9 +17,11 @@ See [https://tailable.github.io/pagination/](https://tailable.github.io/paginati
 
 ```bash
 npm install tailable-pagination
+```
 
 or
 
+```bash
 yarn add tailable-pagination
 ```
 
@@ -79,10 +81,7 @@ export default {
 | `show-disabled` | Boolean | true | (optional) Pagination buttons next and previous, do you want them displayed if there is nothing to click? |
 | `show-numbers ` | Boolean | false | (optional) Pagination show numbered buttons? |
 | `hide-when-empty ` | Boolean | false | (optional) Hides the pagination buttons when there is no need to show them |
-| `translate ` | Object | {
-                nextButton: 'Next',
-                previousButton: 'Previous',
-            } | (optional) Translate button text |
+| `translate ` | Object | { nextButton: 'Next' previousButton: 'Previous' } | (optional) Translate button text |
 
 #### Pagination Events
 

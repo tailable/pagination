@@ -1,11 +1,13 @@
 <template>
     <div id="app" class="flex flex-col max-w-3xl mx-auto my-2 bg-white">
 
-        <button @click="toggleFramework" class="">
-            Toggle
+        <button @click="toggleFramework" class="bg-blue-500 text-white rounded my-2 p-2">
+            Toggle Framework - Currently viewing: {{ `${framework.charAt(0).toUpperCase()}${framework.substr(1)}` }}
         </button>
 
-        <h2 class="my-2 text-center">Size sm</h2>
+        <div class="border-b mb-1">
+            <h2 class="mt-2 text-base text-center">Size sm</h2>
+        </div>
         <pagination
             :data="data"
             size="small"
@@ -14,7 +16,9 @@
             @page-changed="pageChanged">
         </pagination>
 
-        <h2 class="my-2 text-center">Size md(default)</h2>
+        <div class="border-b mb-1">
+            <h2 class="text-lg text-center">Size md(default)</h2>
+        </div>
         <pagination
             :data="data"
             :showNumbers="true"
@@ -22,12 +26,16 @@
             @page-changed="pageChanged">
         </pagination>
 
-        <h2 class="my-2 text-center">Simple Size md(default)</h2>
+        <div class="border-b mb-1">
+            <h2 class="text-lg text-center">Simple Size md(default)</h2>
+        </div>
         <pagination
             :data="data"
             :framework="framework"
             @page-changed="pageChanged">
         </pagination>
+
+        <div class="border-b mb-1"></div>
 
         <pagination
             :data="data"
@@ -46,6 +54,8 @@
             </div>
         </pagination>
 
+        <div class="border-b mb-1"></div>
+
         <pagination
             :data="data"
             :framework="framework"
@@ -59,13 +69,18 @@
             </div>
         </pagination>
 
-        <h2 class="my-2 text-center">Simple Size sm</h2>
+        <div class="border-b mb-1">
+            <h2 class="text-lg text-center">Simple Size sm</h2>
+        </div>
+    
         <pagination
             :data="data"
             size="small"
             :framework="framework"
             @page-changed="pageChanged">
         </pagination>
+
+        <div class="border-b mb-1"></div>
 
         <pagination
             :data="data"
@@ -85,6 +100,8 @@
             </div>
         </pagination>
 
+        <div class="border-b mb-1"></div>
+
         <pagination
             :data="data"
             size="small"
@@ -99,7 +116,8 @@
             </div>
         </pagination>
 
-        <h2 class="my-2 text-center">Custom Body using Slot</h2>
+        <h2 class="text-lg text-center">Custom Body using Slot</h2>
+        
         <pagination
             :data="data"
             size="small"
