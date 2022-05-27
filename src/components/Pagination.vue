@@ -213,7 +213,7 @@ export default class Pagination extends Vue {
 
     get nextButtonClasses(): object {
         return {
-            'inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed': this.framework === 'tailwind',
+            'inline-flex items-center h-full mx-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out border border-gray-400 rounded-md hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed': this.framework === 'tailwind',
             'px-2 py-2': this.size === 'default' && this.framework === 'tailwind',
             'px-1 py-1': this.size === 'small' && this.framework === 'tailwind',
             'page-link': this.framework === 'bootstrap',

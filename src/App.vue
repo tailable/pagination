@@ -136,7 +136,7 @@
                                 'bg-purple-500 text-white': page == currentPage,
                                 'text-gray-700 border-l border-t border-b border-gray-400 hover:bg-gray-200': page != currentPage,
                             }"
-                            class="inline-flex items-center px-4 py-2 h-full text-base font-medium leading-5 transition duration-150 ease-in-out bg-white active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
+                            class="inline-flex items-center px-4 py-2 h-full text-base font-medium leading-5 transition duration-150 ease-in-out active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
                             {{ page }}
                         </button>
                     </li>
