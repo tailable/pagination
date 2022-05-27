@@ -13,6 +13,8 @@ A Vue.js pagination component for Laravel thats built for Tailwind.
 
 See [https://tailable.github.io/pagination/](https://tailable.github.io/pagination/)
 
+Example Code: [https://github.com/tailable/pagination/blob/master/src/App.vue](https://github.com/tailable/pagination/blob/master/src/App.vue)
+
 ## Component Installation
 
 ```bash
