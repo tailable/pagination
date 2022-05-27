@@ -7,7 +7,7 @@ A Vue.js pagination component for Laravel thats built for Tailwind.
 
 * [Vue.js](https://vuejs.org/) 2.x
 * [Laravel](http://laravel.com/docs/) 5.x +
-* [Tailwindcss](https://tailwindcss.com/) 1.x +
+* [Tailwindcss](https://tailwindcss.com/) 2.x
 
 ## Demo & Docs
 
