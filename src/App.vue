@@ -132,7 +132,7 @@
                         <button
                             @click="previousButtonHandler"
                             :disabled="!data.links.prev"
-                            class="inline-flex items-center px-2 py-2 h-full text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border-l border-t border-b border-gray-400 hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                            class="inline-flex items-center px-2 py-2 h-full text-sm font-medium leading-5 text-grey-700 transition duration-150 ease-in-out bg-white border-l border-t border-b border-grey-400 hover:bg-grey-200 active:bg-grey-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-grey-700 disabled:opacity-50 disabled:cursor-not-allowed">
                             
                             <svg
                                 fill="none"
@@ -152,9 +152,9 @@
                             @click="pageButtonHandler(page)"
                             :class="{
                                 'bg-purple-500 text-white': page == currentPage,
-                                'text-gray-700 border-l border-t border-b border-gray-400 hover:bg-gray-200': page != currentPage,
+                                'text-grey-700 border-l border-t border-b border-grey-400 hover:bg-grey-200': page != currentPage,
                             }"
-                            class="inline-flex items-center px-4 py-2 h-full text-base font-medium leading-5 transition duration-150 ease-in-out active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700">
+                            class="inline-flex items-center px-4 py-2 h-full text-base font-medium leading-5 transition duration-150 ease-in-out active:bg-grey-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-grey-700">
                             {{ page }}
                         </button>
                     </li>
@@ -162,7 +162,7 @@
                         <button
                             @click="nextButtonHandler"
                             :disabled="!data.links.next"
-                            class="inline-flex items-center px-2 py-2 h-full text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-400 hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                            class="inline-flex items-center px-2 py-2 h-full text-sm font-medium leading-5 text-grey-700 transition duration-150 ease-in-out bg-white border border-grey-400 hover:bg-grey-200 active:bg-grey-200 focus:outline-none focus:border-blue-300 focus:shadow-outline active:text-grey-700 disabled:opacity-50 disabled:cursor-not-allowed">
                             
                             <svg
                                 fill="none"
