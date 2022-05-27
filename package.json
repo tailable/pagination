@@ -1,6 +1,6 @@
 {
   "name": "tailable-pagination",
-  "version": "0.1.22",
+  "version": "1.0.0",
   "private": false,
   "homepage": "https://tailable.github.io/pagination/",
   "main": "./dist/tailable-pagination.common.js",
